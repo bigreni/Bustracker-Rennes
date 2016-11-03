@@ -17,7 +17,7 @@ xmlns:gap="http://phonegap.com/ns/1.0"
     <preference name="android-build-tool" value="gradle" /> 
     <gap:plugin name="cordova-plugin-admobpro" source="npm" />
     <preference name="permissions" value="none" />
-    <preference name="orientation" value="landscape" />
+    <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
