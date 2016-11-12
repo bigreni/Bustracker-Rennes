@@ -6,9 +6,9 @@ versionCode = "1"
 xmlns="http://www.w3.org/ns/widgets"
 xmlns:gap="http://phonegap.com/ns/1.0"
 >
-    <name>Bus tracker Ponferrada</name>
+    <name>Bus tracker Salamanca</name>
     <description>
-        Ponferrada Bus App with ads.
+        Salamanca Bus App with ads.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

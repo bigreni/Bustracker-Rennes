@@ -7,15 +7,79 @@
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 <title>Lineas</title>
-
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<!-- Include the jQuery library -->
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Include the jQuery Mobile library -->
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </head>
     <body>
         	<div id="fullpage" data-role="page">
-                     <!--<a href="index.html" class="ui-btn ui-btn-b" data-rel="back">Inicio</a>-->
-                    <iframe style="width: 100%; height:600px; border: none" src="http://aplicaciones.ponferrada.org/PonferradaGMaps2/Transportes/buscar_lineas.aspx" height="240" width="320"></iframe>
+                
+                              <div>
+                                  <div> Selecciona una línea:</div>
+                                  <select id="ddLineas" name="line-selector" onchange="changeLineas();">
+                                        <option value=""></option>
+                                        <option value="18">F6 - PALACIO DE CONGRESOS-FERIAL</option>
+                                        <option value="18">F2 - ZAIDIN - FERIAL</option>
+                                        <option value="27">F5 - HAZA GRANDE - FERIAL</option>
+                                        <option value="28">F3 - AVDA. DILAR - FERIAL</option>
+                                        <option value="43">F1 - CENES DE LA VEGA - FERIAL</option>
+                                        <option value="44">F4 - CHANA-FERIAL</option>
+                                        <option value="110">110 - GRANADA - P. ASEGRA - PELIGROS</option>
+                                        <option value="111">111 - CIRCULAR  EN SENTIDO SUR - NORTE</option>
+                                        <option value="120">120 - GRANADA - MARACENA</option>
+                                        <option value="121">121 - CIRCULAR EN SENTIDO NORTE - SUR</option>
+                                        <option value="122">122 - GRANADA - ATARFE</option>
+                                        <option value="123">123 - GRANADA - ALBOLOTE (CTRA JAEN)</option>
+                                        <option value="125">125 - GRANADA - ATARFE (CTRA CORDOBA)</option>
+                                        <option value="126">126 - GRANADA - ATARFE - CAPARACENA</option>
+                                        <option value="155">155 - GRANADA - ARMILLA</option>
+                                        <option value="156">156 - GRANADA - ARMILLA - CHURRIANA - GABIA</option>
+                                        <option value="157">157 - GRANADA - ARMILLA - CHURRIANA - GABIA CHICA</option>
+                                        <option value="158">158 - GRANADA - CAMPUS DE LA SALUD - ARMILLA</option>
+                                        <option value="159">159 - GRANADA - PTS - ARMILLA</option>
+                                        <option value="395">395 - QUENTAR - SALON</option>
+                                        <option value="500">LAC - PALACIO DE CONGRESOS - CALETA</option>
+                                        <option value="501">S0 - PVO. BOLA DE ORO - CRUZ DE LAGOS</option>
+                                        <option value="502">S1 - SERRALLO - PALACIO DE CONGRESOS</option>
+                                        <option value="503">S2 - VILLA ARGAZ - PALACIO DE CONGRESOS</option>
+                                        <option value="504">S3 - PALACIO DE DEPORTES - PALACIO DE CONGRESOS</option>
+                                        <option value="508">N1 - BOBADILLA - CHANA - R. MARIN OCETE</option>
+                                        <option value="510">N3 - CERRILLO MARACENA - R. MARIN OCETE</option>
+                                        <option value="511">N4 -  FEDERICO G.LORCA - E. AUTOBUSES - CALETA</option>
+                                        <option value="512">N5 - MODESTO CENDOYA - JOAQUINA EGUARAS - CALETA</option>
+                                        <option value="513">N6 - CASERIA DEL CERRO - AVDA. PULIANAS - CALETA</option>
+                                        <option value="514">N7 - PARQUE NUEVA GRANADA - TRIUNFO</option>
+                                        <option value="515">N8 - FARGUE - TRIUNFO</option>
+                                        <option value="516">N9 - MIRADOR S. MIGUEL - TRIUNFO</option>          
+                                        <option value="517">C1 - ALBAICIN - CENTRO</option>
+                                        <option value="518">C2 - SACROMONTE - CENTRO</option>
+                                        <option value="519">C3 - ALHAMBRA - PAVANERAS</option>
+                                        <option value="520">C4 - CEMENTERIO - BCO DEL ABOGADO - PZA. ISABEL LA CATOLICA</option>
+                                        <option value="521">C5 - NEPTUNO - PZA. ISABEL LA CATOLICA</option> 
+                                        <option value="522">C6 - ROSALEDA - TRAUMATOLOGIA</option>
+                                        <option value="523">U1 - CAMPUS AYNADAMAR - CAMPUS CARTUJA</option>                                        
+                                        <option value="524">U2 - CAMPUS FUENTE NUEVA - CAMPUS CARTUJA</option>
+                                        <option value="525">U3 - P.T.SALUD - CAMPUS CARTUJA - CNO DE ALFACAR</option>                                                                       <option value="526">SN1 - CENES DE LA VEGA - E. DE AUTOBUSES</option>
+                                        <option value="527">SN2 - PALACIO DE DEPORTES - E. DE AUTOBUSES</option>                                                                            <option value="528">SN3 - REBITES - CHANA</option>
+                                        <option value="529">SN4 - P.T. SALUD - CHANA</option>
+                                        <option value="530">SN5 - AVDA. DE CADIZ - PARQUE NUEVA GRANADA</option>
+                                        <option value="531">C7 - PUERTA REAL - CEMENTERIO</option>  
+                                        <option value="901">901 - URBANO MARACENA</option>
+                                        <option value="950">950 - SERVICIO ESPECIAL (FRAY LEOPOLDO)</option>
+                                        <option value="1111">111 - GRANADA - URB. LA JOYA - PELIGROS</option>
+                                        <option value="1121">121 - GRANADA - MARACENA (CTRA DE JAEN)</option>
+                                      </select>
+                              </div>
+
+                    <div>
+                        <iframe id="nextBus" style="width: 100%; height:600px; border: none" height="240" width="320"></iframe>
+                    </div>
             </div>
     </body>
 </html>

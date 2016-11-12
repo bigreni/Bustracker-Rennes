@@ -55,20 +55,30 @@ a:active {
     text-decoration: none;
 }*/
 
-a.langOption{
-    text-decoration: none;
+div.cabeza
+{
+	padding : 10px;
+	background-color: #ff4848;	
+}
+.table-arrivals {
+    width: 100%;
+    margin-bottom: 0.9rem;
+    border-collapse: separate;
 }
 
-a.backButton{
-    text-decoration: initial;
+.table-arrivals thead {
+    text-align: left;
+    background: #c6d4f8;
 }
 
-h3.proverbTitle {
-    background-color: #ccefdb;
+th {
+    font-weight: bold;
+    text-align: -internal-center;
 }
 
-a.backButton {
-    background-color: #ccefdb;
+.table-arrivals thead th {
+    padding: 0.45rem 0.9rem;
+    text-transform: uppercase;
 }
 
 p.title{
@@ -90,6 +100,7 @@ h1.selectLanguage {
 .ui-page .ui-content .ui-listview .ui-li-heading {
     white-space : normal;
 }​​
+
 
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
