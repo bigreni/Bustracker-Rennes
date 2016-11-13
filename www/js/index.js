@@ -47,3 +47,10 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function refresh() {
+    //var s = document.getElementById('liveMap');
+    //s.location.reload();
+    window.top.location = window.top.location;
+    return false;
+};
