@@ -739,11 +739,7 @@ Map_fullmap.map.zoomTo(6)
 });
 </script>
 </div>
-<div class="languageSelect select_eng">
-<a class="languageButton fin" href="http://reittiopas.foli.fi/bin/help.exe/3finn?tpl=fullmap&">FI</a>
-<a class="languageButton swe" href="http://reittiopas.foli.fi/bin/help.exe/3swen?tpl=fullmap&">SV</a>
-<a class="languageButton eng" href="http://reittiopas.foli.fi/bin/help.exe/3engn?tpl=fullmap&">EN</a>
-</div>
+
 <div id="dimmer" style="display:none;"><img alt="" src="http://reittiopas.foli.fi/hafas-res/img/wait.gif" /></div>
 <div id="dimmericon" style="display:none;">
 <img src="http://reittiopas.foli.fi/hafas-res/img/livemap/ajax_loader.gif"/><br/><br/>
@@ -862,8 +858,8 @@ Play
 </div>
 </div>
 <div id="mapCatLivemapContainer">
-<div style="margin:6px;">
-<span id="timer"></span>
+<div>
+<span id="timer" hidden="hidden"></span>
 <div title="" onclick="Hafas.Maps.toggleNotifications();" style="display:none;" class="notificationView" id="notificationCenter">
 <div id="notificationRoutesCounter">0</div>
 </div>
