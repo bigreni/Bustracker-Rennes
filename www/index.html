@@ -648,13 +648,10 @@ Map_fullmap.updateSize();
 }
 gAppManager.organizeApps();
 }
-var onSuccess = function(position){
-    var mapType = showAjaxMap_fullmap(position.coords.latitude,position.coords.longitude);
+addEventListener("load", function(){
+var mapType = showAjaxMap_fullmap();
 gMapBib.addMap(Map_fullmap, "fullmap");
 resizeMap();
-}
-addEventListener("load", function(){
-    navigator.geolocation.getCurrentPosition(onSuccess, onSuccess);
 });
 addEventListener("resize", function(){
 resizeMap();
@@ -768,18 +765,17 @@ gJSMapImagePath =gImagePath+"js/";
 <div id="fullmap" style="position:relative; left:0;top:0;width:100%;height:490px;"></div>
 </div>
 <script type="text/javascript">
-
 function clickOnMapHandler_fullmap(eventData) {
 gAppManager.doEvent("clickOnMap", eventData);
 }
 var Map_fullmap = null;
-function showAjaxMap_fullmap(latitude, longitude){
+function showAjaxMap_fullmap(){
 Map_fullmap = new HafasOpenLayersMap('fullmap',
 {
 zoom:33554432,
 wheelZoom:true,
-coord:new CCoord({lon:longitude,
-lat:latitude}),
+coord:new CCoord({lon:22272838,
+lat:60448965}),
 language:'eng',
 mode:'',
 onclick:function(geo) {
