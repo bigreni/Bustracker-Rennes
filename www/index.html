@@ -648,10 +648,13 @@ Map_fullmap.updateSize();
 }
 gAppManager.organizeApps();
 }
-addEventListener("load", function(){
-var mapType = showAjaxMap_fullmap();
+var onSuccess = function(position){
+    var mapType = showAjaxMap_fullmap(position.coords.latitude,position.coords.longitude);
 gMapBib.addMap(Map_fullmap, "fullmap");
 resizeMap();
+}
+addEventListener("load", function(){
+    navigator.geolocation.getCurrentPosition(onSuccess, onSuccess);
 });
 addEventListener("resize", function(){
 resizeMap();
@@ -765,11 +768,12 @@ gJSMapImagePath =gImagePath+"js/";
 <div id="fullmap" style="position:relative; left:0;top:0;width:100%;height:490px;"></div>
 </div>
 <script type="text/javascript">
+
 function clickOnMapHandler_fullmap(eventData) {
 gAppManager.doEvent("clickOnMap", eventData);
 }
 var Map_fullmap = null;
-function showAjaxMap_fullmap(){
+function showAjaxMap_fullmap(latitude, longitude){
 Map_fullmap = new HafasOpenLayersMap('fullmap',
 {
 zoom:33554432,
@@ -799,7 +803,7 @@ var gAppManager = new AppManager();
 <div class="map_app" style="left:10px; top:20px; right:auto; display:none; z-index:8000;" id="app_livefahrplan_div" onmousedown="gAppManager.appToTop('livefahrplan');">
 <div class="dragbar" id="app_livefahrplan_dragbar">
 <span style="position:relative; z-index:100;">
-F&#246;li on the map
+Filter
 </span>
 <img class="app_dragbar_button" src="http://reittiopas.foli.fi/hafas-res/img/app_close.png" onclick="gAppManager.hide_app_content('livefahrplan');" id="app_livefahrplan_hide" title="ausblenden" />
 <img class="app_dragbar_button" src="http://reittiopas.foli.fi/hafas-res/img/app_open.png" style="display:none;" onclick="gAppManager.show_app_content('livefahrplan');"  id="app_livefahrplan_show" title="anzeigen" />
