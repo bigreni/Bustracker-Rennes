@@ -1,85 +1,1076 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 <meta name="format-detection" content="telephone=no" />
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-<title>Lineas</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<!-- Include the jQuery library -->
-<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-<!-- Include the jQuery Mobile library -->
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="css/index.css" />
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<title>F&#246;li on the map</title>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/lib/jquery-1.9.1.js"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/lib/markup.min.js"></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/markupPipes_turku.js?guiV=1.5.27&"></script>
+<script type="text/javascript">
+var Hafas = {};
+Hafas.ps = {
+pub:function() {},
+sub:function() {}
+};
+Hafas.registerEvents = function() {};
+if(typeof console == "undefined")
+{
+var console = {
+log:function() { },
+error:function() { },
+warn:function() { }
+}
+}
+hfsGui = {};
+</script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/hafas_tools.js?guiV=1.5.27&"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/hafas_sq.js?guiV=1.5.27&"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/hafas_tq.js?guiV=1.5.27&"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/hafas_tp.js?guiV=1.5.27&"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/hafasLib/SimpleSuggest.js?guiV=1.5.27&"> </script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tpJsonUrl = "http://reittiopas.foli.fi/bin/query.exe/3engny?ld=std&amp;";
+if(typeof Hafas == 'undefined'){
+var Hafas = {};
+}
+Hafas.Config = new Object;
+Hafas.Config.gBaseUrl                = "http://reittiopas.foli.fi";
+Hafas.Config.gUrlTravelPlanner       = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+Hafas.Config.gUrlTravelPlannerJSON   = Hafas.Config.gUrlTravelPlanner.substr(0,Hafas.Config.gUrlTravelPlanner.length-1);
+Hafas.Config.gUrlStationQuery        = "http://reittiopas.foli.fi/bin/stboard.exe/3engn?";
+Hafas.Config.gUrlAjaxGetStop         = "http://reittiopas.foli.fi/bin/ajax-getstop.exe/3engn?";
+Hafas.Config.gUrlTimetableBooklet    = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+Hafas.Config.gUrlTrainSearch         = "http://reittiopas.foli.fi/bin/trainsearch.exe/3engn?";
+Hafas.Config.gUrlTrainInfo           = "http://reittiopas.foli.fi/bin/traininfo.exe/3engn/";
+Hafas.Config.gUrlTrainInfoJSON       = "http://reittiopas.foli.fi/bin/traininfo.exe/3engny/"
+Hafas.Config.gUrlProfile             = "http://reittiopas.foli.fi/bin/profile.exe/3engn?";
+Hafas.Config.gUrlHelp                = "http://reittiopas.foli.fi/bin/help.exe/3engn?";
+Hafas.Config.gCatenateSeqnr          = "";
+Hafas.Config.gCatenateIdent          = "";
+Hafas.Config.gCatenateLayout         = "";
+Hafas.Config.gLanguage               = "eng";
+Hafas.Config.gBrowser                = "n";
+Hafas.Config.gQuery_path             = "http://reittiopas.foli.fi/bin/query.exe";
+Hafas.Config.gStboard_path           = "http://reittiopas.foli.fi/bin/stboard.exe";
+Hafas.Config.gTrainsearch_path       = "http://reittiopas.foli.fi/bin/trainsearch.exe";
+Hafas.Config.gProfile_path           = "http://reittiopas.foli.fi/bin/profile.exe";
+Hafas.Config.gHelp_path              = "http://reittiopas.foli.fi/bin/help.exe";
+Hafas.Config.gUrlPrefix              = "http://reittiopas.foli.fi";
+Hafas.Config.gImagePath              = "http://reittiopas.foli.fi/hafas-res/img/";
+Hafas.Config.gScriptPath             = "http://reittiopas.foli.fi/hafas-res/js/";
+Hafas.Config.gStaticTileURL          = "";
+Hafas.Config.gStaticTileStyle        = "";
+Hafas.Config.gJSMapImagePath         = "http://reittiopas.foli.fi/hafas-res/img/js/";
+Hafas.Config.gDynamicTileParameterGoogle = 'proj=google&';
+Hafas.Config.gDynamicTileParameterPTV = 'proj=ptv&';
+Hafas.Config.cookiePrefix            = "CookiePrefix";
+Hafas.GuiVersion = "?guiV=1.5.27&".split("=")[1];
+Hafas.Products = [];
+Hafas.Config.Products = {};
+Hafas.currentPage = "";
+Hafas.Config.Products["0"] = {
+index:0,
+bitValue:1,
+name:"Line",
+icon:"",
+longName:"Line",
+color:"000000"
+};
+Hafas.Texts = new Array();
+Hafas.Texts.Calendar = {
+"monthnames" : ['January','February','March','April','May','June','July','August','September','October','November','December'],
+"daynames" : ['Mo','Tu','We','Th','Fr','Sa','Su'],
+"daynamesLong" : ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+};
+Hafas.Texts.ConnectionMap = {
+chooseAsStart: '',
+chooseAsDest: '',
+surroundSearch: '',
+setAsReference: ''
+};
+Hafas.Texts.OpenLayers = {
+zoomStreet: '',
+zoomCity: '',
+zoomState: '',
+zoomCountry: ''
+};
+Hafas.Texts.Alphabet = ['','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+Hafas.Texts.Options = {
+defaultParams: '',
+changed: ''
+};
+Hafas.Texts.Traffic = {
+radius: '',
+construction: '',
+attention: '',
+webcam: ''
+};
+Hafas.Texts.tp = {
+firstConnection:"First connection",
+lastConnection:"Last connection",
+shortMeters:"m",
+shortKm:"km",
+pleaseSelectHouseNuber:"Please select a house number",
+coord:"Coordinates"
+};
+Hafas.Texts.observe = {
+tObserveSubscriptionEMailSuccessfull:"You are now observing this journey. You will receive an e-mail, when we receive relevant news of disruptions or delays on your journey.",
+tObserveSubscriptionSMSSuccessfull:"You are now observing this journey. You will receive a text message, when we receive relevant news of disruptions or delays on your journey.",
+tObserveSubscriptionUnSuccessfull:"Sorry, an error has occured while subscribing to this journey. System administrators will noticed about this error automatically.",
+tObserveNoMailError:"Please enter an e-mail address",
+tObserveNoNumberError:"Please enter a telephone number",
+tObserveNumberNotFinsihError:"Please enter finnish telephone number",
+tObserveWrongNumberError:"Illegal telephone number"
+};
+Hafas.Texts.Directions = {
+FROM: '',
+TO: '',
+ON: '',
+LEFT: '',
+HALFLEFT: '',
+SHARPLEFT: '',
+RIGHT: '',
+HALFRIGHT: '',
+SHARPRIGHT: '',
+STRAIGHT: '',
+TURN: '',
+UTURN: '',
+NORTH: '',
+SOUTH: '',
+EAST: '',
+WEST: '',
+error: ''
+};
+Hafas.Texts.DirectionsTextual = {
+FROM: "from",
+TO: "to",
+ON: "on",
+LEFT: "turn left",
+RIGHT: "turn right",
+KEEP_LEFT: "keep left",
+KEEP_RIGHT: "keep right",
+HALF_LEFT: "half left",
+HALF_RIGHT: "half right",
+KEEP_HALF_LEFT: "keep half left",
+KEEP_HALF_RIGHT: "keep half right",
+SHARP_LEFT: "sharp left",
+SHARP_RIGHT: "sharp right",
+KEEP_SHARP_LEFT: "keep sharp left",
+KEEP_SHARP_RIGHT: "keep sharp right",
+STRAIGHT: "straight",
+UTURN: "turn over",
+ENTER: "enter",
+LEAVE: "leave",
+ENTER_ROUNDABOUT: "enter roundabout",
+STAY_IN_ROUNDABOUT: "stay in roundabout",
+LEAVE_ROUNDABOUT: "leave roundabout",
+ENTER_FERRY: "enter ferry",
+LEAVE_FERRY: "leave ferry",
+CHANGE_HIGHWAY: "change highway",
+UNKNOWN: "&nbsp;",
+NO_DESCRIPTION: ""
+};
+Hafas.Texts.SingleField = {
+routeFrom: '',
+to: '',
+setAsStart: '',
+setAsDestination: '',
+currentPosition: '',
+setCurrentPosition: '',
+stationboard: '',
+withDirection: '',
+showOnMap: '',
+set: '',
+show: '',
+locating: '',
+locatingError: '',
+reachability: ''
+};
+Hafas.Texts.Reachability = {
+reachable: ''
+};
+Hafas.Texts.Suggest = {
+next:"next",
+prev:"previous"
+};
+Hafas.Texts.RealTime = {
+lineIsLate:"Line is late",
+lineIsLatePrefix:"",
+lineIsLatePostfix:"is late",
+lineCanceled:"Line is not working",
+lineCritical:"Line is critical late",
+errorOn:"Error on"
+}
+Hafas.Config.FoorwayDescriptionImages = {
+FROM:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_empty.gif",
+TO:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_empty.gif",
+ON:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tl_n.gif",
+RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tr_n.gif",
+KEEP_LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kl.gif",
+KEEP_RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kr.gif",
+HALF_LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tl_h.gif",
+HALF_RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tr_h.gif",
+KEEP_HALF_LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kl.gif",
+KEEP_HALF_RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kr.gif",
+SHARP_LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tl_n.gif",
+SHARP_RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tr_n.gif",
+KEEP_SHARP_LEFT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kl.gif",
+KEEP_SHARP_RIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_kr.gif",
+STRAIGHT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+UTURN:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_tl_u.gif",
+ENTER:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+LEAVE:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+ENTER_ROUNDABOUT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_ra_in.gif",
+STAY_IN_ROUNDABOUT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+LEAVE_ROUNDABOUT:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_ra_out.gif",
+ENTER_FERRY:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+LEAVE_FERRY:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_st_on.gif",
+CHANGE_HIGHWAY:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_empty.gif",
+UNKNOWN:"http://reittiopas.foli.fi/hafas-res/img/directions/direction_empty.gif"
+};
+/* ]]> */
+</script>
+<script type="text/calTemplate" id="jsTpl_CalendarTemplate">
+<div class="HFS_CalendarDiv" id="HFS_Calendar_###CAL_ID###" style="display: none;">
+<div class="HFS_CalendarCloseButton" id="HFS_Calendar_###CAL_ID###_close">
+<a onclick="HafasCalendarModule.closeCalendar('###CAL_ID###');" href="javascript:void(0);">
+<img src="http://reittiopas.foli.fi/hafas-res/img/icons/close_button.png" />
+</a>
+</div>
+<div id="HFS_Calendar_###CAL_ID###_middle">
+<div class="HFS_CalendarSheet" id="HFS_Calendar_###CAL_ID###_sheet_0">
+<div class="HFS_CalendarMonthName" id="HFS_Calendar_###CAL_ID###_sheet_0_month">&nbsp;</div>
+<div class="HFS_CalendarMonthSwitch HFS_CalendarMonthSwitchPrev"><a id="HFS_Calendar_###CAL_ID###_prevLink" href="javascript:void(0);">&lt;</a>
+</div>
+<div class="HFS_CalendarMonthSwitch HFS_CalendarMonthSwitchNext"><a id="HFS_Calendar_###CAL_ID###_nextLink" href="javascript:void(0);">&gt;</a>
+</div>
+<div class="HFS_CalendarDayNames">
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday0" class="">Mo</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday1" class="">Tu</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday2" class="">We</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday3" class="">Th</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday4" class="">Fr</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday5" class="">Sa</div>
+<div id="HFS_Calendar_###CAL_ID###_sheet_0_weekday6" class="">Su</div>
+</div>
+<div class="HFS_CalendarSheetFields">
+<div class="HFS_CalendarDayGridWrapper">
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_0">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_1">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_2">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_3">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_4">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_5">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_6">&nbsp;</div>
+</div>
+</div>
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_7">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_8">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_9">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_10">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_11">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_12">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_13">&nbsp;</div>
+</div>
+</div>
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_14">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_15">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_16">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_17">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_18">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_19">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_20">&nbsp;</div>
+</div>
+</div>
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_21">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_22">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_23">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_24">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_25">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_26">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_27">&nbsp;</div>
+</div>
+</div>
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_28">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_29">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_30">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_31">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_32">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_33">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_34">&nbsp;</div>
+</div>
+</div>
+<div class="HFS_CalendarRow">
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_35">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_36">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_37">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_38">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_39">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_40">&nbsp;</div>
+</div>
+<div class="HFS_CalendarDayWrapper lastCol lastRow">
+<div class="" id="HFS_Calendar_###CAL_ID###_sheet_0_field_41">&nbsp;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="HFS_CalendarFooter" id="HFS_Calendar_###CAL_ID###_footer"></div>
+</div>
+</script>
+<script type="text/javascript">
+var calendarDaySwitch = '<a id="HFS_Calendar_###CAL_ID###_prevDay" href="javascript:void(0);" class="sc_calButton lc_calButton"><img style="width:26px; height:26px;" src="http://reittiopas.foli.fi/hafas-res/img/icons/minus.png" alt="One day sooner" title="One day sooner" /></a>'
++ '<a id="HFS_Calendar_###CAL_ID###_nextDay" href="javascript:void(0);" class="sc_calButton lc_calButton"><img style="width:26px; height:26px;" src="http://reittiopas.foli.fi/hafas-res/img/icons/plus.png" alt="One day later" title="One day later" /></a>';
+var calendarTextIcon = '<a id="HFS_Calendar_###CAL_ID###_link" href="javascript:void(0);" class="sc_calButton lc_calButton"><img style="width:26px; height:26px;" src="http://reittiopas.foli.fi/hafas-res/img/icons/calendar.png" alt="Open calendar" /></a>';
+var openCalendarLink = calendarDaySwitch + calendarTextIcon;
+/* layered calendar */
+var CalendarModelDefault = document.getElementById("jsTpl_CalendarTemplate").innerHTML;
+Hafas.Config.Calendar = {
+calendarModel: CalendarModelDefault,
+calendarLink: openCalendarLink
+};
+</script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/proj4js.js?guiV=1.5.27&"></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/projCode/tmerc.js?guiV=1.5.27&"></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/projCode/merc.js?guiV=1.5.27&"></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/openlayers/OpenLayers.js?guiV=1.5.27&" ></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/OpenStreetMap.js?guiV=1.5.27&" ></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/AjaxMap.js?guiV=1.5.27&" ></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/HafasOpenLayersMap_VTurku.js?guiV=1.5.27&" ></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/jsInfobox.js?guiV=1.5.27&" ></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/hafasLib/tpResultMap.js?guiV=1.5.27&" ></script>
+<script type="text/javascript">
+Hafas.Maps = {};
+Hafas.Maps.Instances = {};
+</script>
+<script type="text/template" id="jsTpl_InfoboxWait">
+<div class="infoboxContent">
+<img src="http://reittiopas.foli.fi/hafas-res/img/wait_ani_small.gif" alt="wait" />
+</div>
+</script>
+<script type="text/template" id="jsTpl_InfoboxMapTp">
+<div class="infoboxContent">
+<div class="infoboxHeader">
+{{location.type|locationIcon}}
+<span>{{location.name}}</span>
+</div>
+<div class="linkList">
+<div class="row">
+<a class="link textLink"
+onclick="hfsGui.tp.setInputLocation({ type:{{location.type}}, name:'{{location.name}}', tripId:'{{location.tupelId}}', y:'{{location.y}}', x:'{{location.x}}', id:'{{location.id}}' }, 'dep');
+JsInfobox.closeInfobox('{{infoboxId}}');"
+><span class="clickItem">Select as start</span></a>
+</div>
+<div class="row">
+<a class="link textLink"
+onclick="hfsGui.tp.setInputLocation({ type:{{location.type}}, name:'{{location.name}}', tripId:'{{location.tupelId}}', y:'{{location.y}}', x:'{{location.x}}', id:'{{location.id}}' }, 'arr');
+JsInfobox.closeInfobox('{{infoboxId}}');"
+><span class="clickItem">Select as destination</span></a>
+</div>
+</div>
+</div>
+</script>
+<script type="text/templates" id="jsTpl_StationInfobox">
+<div class="stationInfoboxContent">
+<div class="IBNavi">
+<span class="tab active" onclick="StationInfobox.goToTab_info({{infobox.get}});" id="StationInfobox_tab_info_{{infobox.id}}">Info</span>
+<span class="tab" onclick="StationInfobox.goToTab_nextBus({{infobox.get}});" id="StationInfobox_tab_nextBus_{{infobox.id}}">Next Lines</span>
+</div>
+<div class="IBContent" id="StationInfoboxContent_info_{{infobox.id}}">
+<b>{{location.name}}</b> <br />
+<a onclick="hfsGui.sqQuery.searchFor('{{location.name}}', '{{location.id}}', null); {{infobox.get}}.hide();">Station Info</a> <br />
+<a onclick="hfsGui.tp.setLocationAs('{{location.name}}', 'A=1@O={{location.name}}@L={{location.id}}@X={{location.x}}@Y={{location.y}}', 'from'); {{infobox.get}}.hide();">Set as departure stop<img src="/hafas-res/img/icons/plus.png" class="plus" /></a> <br />
+<a onclick="hfsGui.tp.setLocationAs('{{location.name}}', 'A=1@O={{location.name}}@L={{location.id}}@X={{location.x}}@Y={{location.y}}', 'to'); {{infobox.get}}.hide();">Set as arrival stop<img src="/hafas-res/img/icons/plus.png" class="plus" /></a> <br />
+</div>
+<div class="IBContent" id="StationInfoboxContent_nextBus_{{infobox.id}}" style="display:none;">
+<b>{{location.name}}</b> <br />
+<div id="StationInfobox_nextBusList_{{infobox.id}}">
+</div>
+</div>
+</div>
+</script>
+<script type="text/templates" id="jsTpl_nextBusList">
+<div class="nextDepList">
+<div class="irow ihead">
+<div class="icol name">Line</div>
+<div class="icol dir">Direction</div>
+<div class="icol time">Dep</div>
+</div>
+{{journeyList}}
+<div class="irow list">
+<div class="icol name textLink" onclick="hfsGui.tq.searchLine('{{line.name}}', '{{line.param}}', '{{line.date}}', null);" title="Show stationboard"><img src="http://reittiopas.foli.fi/hafas-res/img/icons/bus.png" alt="" /> <span class="clickItem">{{line.name}}</span></div>
+<div class="icol dir">{{line.direction}}</div>
+<div class="icol time
+{{if realTime.hasRealTime}}
+hasRealTime
+{{/if}}
+">
+{{time}}
+{{if realTime.isCanceled}}
+<img class="rtIcon" src="http://reittiopas.foli.fi/hafas-res/img/icons/warn.png" alt="Line is not working" title="Line is not working" />
+{{else}}
+{{if realTime.isDelayed}}
+<span class="delay">+{{realTime.delay}}</span>
+{{/if}}
+{{if realTime|isOnTime}}
+<img class="rtIcon" src="http://reittiopas.foli.fi/hafas-res/img/icons/onTime.png" alt="On time" title="On time" />
+{{/if}}
+{{/if}}
+</div>
+</div>
+{{/journeyList}}
+</div>
+</script>
+<script type="text/javascript">
+if(typeof Hafas == 'undefined'){
+var Hafas = {};
+}
+Hafas.Config = new Object;
+Hafas.Config.gBaseUrl                = "http://reittiopas.foli.fi";
+Hafas.Config.gUrlTravelPlanner       = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+Hafas.Config.gUrlTravelPlannerJSON   = Hafas.Config.gUrlTravelPlanner.substr(0,Hafas.Config.gUrlTravelPlanner.length-1);
+Hafas.Config.gUrlStationQuery        = "http://reittiopas.foli.fi/bin/stboard.exe/3engn?";
+Hafas.Config.gUrlAjaxGetStop         = "http://reittiopas.foli.fi/bin/ajax-getstop.exe/3engn?";
+Hafas.Config.gUrlTimetableBooklet    = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+Hafas.Config.gUrlTrainSearch         = "http://reittiopas.foli.fi/bin/trainsearch.exe/3engn?";
+Hafas.Config.gUrlTrainInfo           = "http://reittiopas.foli.fi/bin/traininfo.exe/3engn/";
+Hafas.Config.gUrlTrainInfoJSON       = "http://reittiopas.foli.fi/bin/traininfo.exe/3engny/"
+Hafas.Config.gUrlProfile             = "http://reittiopas.foli.fi/bin/profile.exe/3engn?";
+Hafas.Config.gUrlHelp                = "http://reittiopas.foli.fi/bin/help.exe/3engn?";
+Hafas.Config.gCatenateSeqnr          = "";
+Hafas.Config.gCatenateIdent          = "";
+Hafas.Config.gCatenateLayout         = "";
+Hafas.Config.gLanguage               = "eng";
+Hafas.Config.gBrowser                = "n";
+Hafas.Config.gQuery_path             = "http://reittiopas.foli.fi/bin/query.exe";
+Hafas.Config.gStboard_path           = "http://reittiopas.foli.fi/bin/stboard.exe";
+Hafas.Config.gTrainsearch_path       = "http://reittiopas.foli.fi/bin/trainsearch.exe";
+Hafas.Config.gProfile_path           = "http://reittiopas.foli.fi/bin/profile.exe";
+Hafas.Config.gHelp_path              = "http://reittiopas.foli.fi/bin/help.exe";
+Hafas.Config.gUrlPrefix              = "http://reittiopas.foli.fi";
+Hafas.Config.gImagePath              = "http://reittiopas.foli.fi/hafas-res/img/";
+Hafas.Config.gScriptPath             = "http://reittiopas.foli.fi/hafas-res/js/";
+Hafas.Config.gStaticTileURL          = "";
+Hafas.Config.gStaticTileStyle        = "";
+Hafas.Config.gJSMapImagePath         = "http://reittiopas.foli.fi/hafas-res/img/js/";
+Hafas.Config.gDynamicTileParameterGoogle = 'proj=google&';
+Hafas.Config.gDynamicTileParameterPTV = 'proj=ptv&';
+Hafas.Config.cookiePrefix            = "CookiePrefix";
+</script>
+<script type="text/javascript">
+if(typeof Hafas == 'undefined'){
+var Hafas = new Object;
+}
+/* <![CDATA[ */
+gBaseUrl                = "http://reittiopas.foli.fi";
+gUrlTravelPlanner       = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+gUrlTravelPlannerJSON   = gUrlTravelPlanner.substr(0,gUrlTravelPlanner.length-1);
+gUrlStationQuery        = "http://reittiopas.foli.fi/bin/stboard.exe/3engn?";
+gUrlAjaxGetStop         = "http://reittiopas.foli.fi/bin/ajax-getstop.exe/3engn?";
+gUrlTimetableBooklet    = "http://reittiopas.foli.fi/bin/query.exe/3engn?";
+gUrlTrainSearch         = "http://reittiopas.foli.fi/bin/trainsearch.exe/3engn?";
+gUrlTrainInfo           = "http://reittiopas.foli.fi/bin/traininfo.exe/3engn/";
+gUrlProfile             = "http://reittiopas.foli.fi/bin/profile.exe/3engn?";
+gUrlHelp                = "http://reittiopas.foli.fi/bin/help.exe/3engn?";
+gCatenateSeqnr          = "";
+gCatenateIdent          = "";
+gCatenateLayout         = "";
+gLanguage               = "eng";
+gBrowser                = "n";
+gQuery_path             = "http://reittiopas.foli.fi/bin/query.exe";
+gStboard_path           = "http://reittiopas.foli.fi/bin/stboard.exe";
+gTrainsearch_path       = "http://reittiopas.foli.fi/bin/trainsearch.exe";
+gProfile_path           = "http://reittiopas.foli.fi/bin/profile.exe";
+gHelp_path              = "http://reittiopas.foli.fi/bin/help.exe";
+gUrlPrefix              = "http://reittiopas.foli.fi";
+gImagePath              = "http://reittiopas.foli.fi/hafas-res/img/";
+gJSMapImagePath         = "http://reittiopas.foli.fi/hafas-res/img/js/";
+gDynamicTileParameterGoogle = 'proj=google&';
+gDynamicTileParameterPTV = 'proj=google&';
+Hafas.Products = new Array();
+Hafas.Products.push({value:1,name:"Line"});Hafas.Config.productBitsArray = new Array();
+Hafas.Config.productBitsArray.push(1);
+Hafas.Config.ProductImages = new Array();
+Hafas.Config.ProductImagesHTML = new Array();
+Hafas.Config.ProductColors = new Array();
+Hafas.Config.ProductImages[1] = 'http://reittiopas.foli.fi/hafas-res/img/products/prod_06_drop.png';
+Hafas.Config.ProductImagesHTML[1] = "<img src='http://reittiopas.foli.fi/hafas-res/img/products/prod_06_ball.png' width='34' height='34' alt='Line' title='Line' />";
+Hafas.Config.ProductColors[1] = '000000';
+</script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/AppManager.js??guiV=1.5.27&"></script>
+<script type="text/javascript">
+/* Initial Timestamp */
+if(typeof Hafas.Maps == 'undefined'){
+Hafas.Maps = new Object;
+}
+Hafas.Maps.toggleTrainNotifications = function(){
+}
+Hafas.Maps.toggleNotifications = function(){
+if(document.getElementById('notificationsWindow').style.display == 'none'){
+document.getElementById('notificationsWindow').style.display = 'block';
+}
+}
+Hafas.Maps.enableDimmer = function(){
+eId("dimmer").style.display = "block";
+}
+Hafas.Maps.disableDimmer = function(){
+eId("dimmer").style.display = "none";
+}
+if(typeof Hafas.Texts == 'undefined') { Hafas.Texts = new Object; }
+Hafas.Texts.Livemap = new Object;
+Hafas.Texts.Livemap["nextstop"] = "";
+Hafas.Texts.Livemap["destination"] = "";
+Hafas.Texts.Livemap["followjourney"] = "Follow Bus";
+Hafas.Texts.Livemap["ontime"] = "";
+Hafas.Texts.Livemap["showroute"] = "Show route";
+var gURLHaiti = "";
+var initialTimestampQuery = "02:34:10";
+function parseAmp(t)
+{
+t = decode(t);
+t = t.replace(/&quot;/g,'"');
+t = t.replace(/&lt;/g,'<');
+t = t.replace(/&gt;/g,'>');
+t = t.replace(/&amp;/g,'&');
+return t;
+}
+</script>
+<script type="text/javascript">
+function resizeMap(){
+var currentHeight = 0;
+var mapWidth = 0;
+if(navigator.userAgent.toString().toLowerCase().indexOf('msie') == -1){
+currentHeight = window.innerHeight;
+mapWidth = window.innerWidth;
+}
+else{
+if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+//IE 6+ in 'standards compliant mode'
+currentHeight = document.documentElement.clientHeight;
+mapWidth = document.documentElement.clientWidth;
+}
+else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+//IE 4 compatible
+currentHeight = document.body.clientHeight;
+mapWidth = document.body.clientWidth;
+}
+}
+document.getElementById('fullmap').style.height = currentHeight + 'px';
+if(typeof Map_fullmap != 'undefined'){
+Map_fullmap.updateSize();
+}
+gAppManager.organizeApps();
+}
+addEventListener("load", function(){
+var mapType = showAjaxMap_fullmap();
+gMapBib.addMap(Map_fullmap, "fullmap");
+resizeMap();
+});
+addEventListener("resize", function(){
+resizeMap();
+});
+function MapBib()
+{
+this.mapArray = {};
+this.keyList = [];
+this.routeArray = {};
+this.addMap = function(map, name)
+{
+this.mapArray[name] = map;
+this.keyList.push(name);
+this.routeArray[name] = [];
+}
+this.addRoute = function(name, type, wayData)
+{
+this.routeArray[name].push({ type:type, data:wayData });
+}
+this.getMapByName = function(name)
+{
+return this.mapArray[name];
+}
+this.getRoutsByName = function(name)
+{
+return this.routeArray[name];
+}
+}
+var gMapBib = new MapBib();
+/* ]]> */
+</script>
+<link rel="stylesheet" type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/fullmap/hafas_default_suggest.css??guiV=1.5.27&"/>
+<link rel="stylesheet" type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/infobox.css??guiV=1.5.27&"/>
+<link rel="stylesheet" type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/fullmap/hafas_default_livemap.css??guiV=1.5.27&"/>
+<link rel="stylesheet" type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/fullmap/hafas_default_calendar.css??guiV=1.5.27&"/>
+<link type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/fullmap/fullscreenmap.css??guiV=1.5.27&" rel="stylesheet" />
+<link type="text/css" href="http://reittiopas.foli.fi/hafas-res/css/fullmap/fullscreenmap_mobile.css??guiV=1.5.27&" rel="stylesheet" />
+<style type="text/css">
+.notificationView {
+/*background-image: url(/hafas-res/img/fullscreenmap/ts_navicon.png);*/
+background-image: url(http://reittiopas.foli.fi/hafas-res/img/fullscreenmap/train.png); background-position:3px;
+}
+#HFS div.ajaxmapdiv{
+border:none !important;
+}
+#HFS {
+width:auto !important;
+max-width:none !important;
+}
+#HFS .calendardiv a.close-button  { background-image:url(http://reittiopas.foli.fi/hafas-res/img/close_b.png); }
+#infobox_popup_close                                     { background:url(http://reittiopas.foli.fi/hafas-res/img/map/osm_infobox_close.png); cursor:pointer; }
+#HFS a.arrowlink   { background:url(http://reittiopas.foli.fi/hafas-res/img/icons/icon_arrow_2.gif) no-repeat scroll 4px 4px; display:inline-block; padding-left:20px; text-decoration:none; color:#285D98; cursor:pointer; }
+#HFS .suggestAchor .suggest .item .icon.icon_train {
+background:url(http://reittiopas.foli.fi/hafas-res/img/icons/suggest_stop.png);
+}
+#HFS .suggestAchor .suggest .item .icon.icon_marker {
+background:url(http://reittiopas.foli.fi/hafas-res/img/icons/suggest_adress.png);
+}
+#HFS .suggestAchor .suggest .item .icon.icon_poi {
+background:url(http://reittiopas.foli.fi/hafas-res/img/icons/suggest_poi.png);
+}
+</style>
+<script type="text/javascript">
+var Map_fullmap_InitFunctions = [];
+</script>
 </head>
-    <body>
-        	<div id="fullpage" data-role="page">
-                
-                              <div>
-                                  <div> Selecciona una línea:</div>
-                                  <select id="ddLineas" name="line-selector" onchange="changeLineas();">
-                                        <option value=""></option>
-                                        <option value="18">F6 - PALACIO DE CONGRESOS-FERIAL</option>
-                                        <option value="18">F2 - ZAIDIN - FERIAL</option>
-                                        <option value="27">F5 - HAZA GRANDE - FERIAL</option>
-                                        <option value="28">F3 - AVDA. DILAR - FERIAL</option>
-                                        <option value="43">F1 - CENES DE LA VEGA - FERIAL</option>
-                                        <option value="44">F4 - CHANA-FERIAL</option>
-                                        <option value="110">110 - GRANADA - P. ASEGRA - PELIGROS</option>
-                                        <option value="111">111 - CIRCULAR  EN SENTIDO SUR - NORTE</option>
-                                        <option value="120">120 - GRANADA - MARACENA</option>
-                                        <option value="121">121 - CIRCULAR EN SENTIDO NORTE - SUR</option>
-                                        <option value="122">122 - GRANADA - ATARFE</option>
-                                        <option value="123">123 - GRANADA - ALBOLOTE (CTRA JAEN)</option>
-                                        <option value="125">125 - GRANADA - ATARFE (CTRA CORDOBA)</option>
-                                        <option value="126">126 - GRANADA - ATARFE - CAPARACENA</option>
-                                        <option value="155">155 - GRANADA - ARMILLA</option>
-                                        <option value="156">156 - GRANADA - ARMILLA - CHURRIANA - GABIA</option>
-                                        <option value="157">157 - GRANADA - ARMILLA - CHURRIANA - GABIA CHICA</option>
-                                        <option value="158">158 - GRANADA - CAMPUS DE LA SALUD - ARMILLA</option>
-                                        <option value="159">159 - GRANADA - PTS - ARMILLA</option>
-                                        <option value="395">395 - QUENTAR - SALON</option>
-                                        <option value="500">LAC - PALACIO DE CONGRESOS - CALETA</option>
-                                        <option value="501">S0 - PVO. BOLA DE ORO - CRUZ DE LAGOS</option>
-                                        <option value="502">S1 - SERRALLO - PALACIO DE CONGRESOS</option>
-                                        <option value="503">S2 - VILLA ARGAZ - PALACIO DE CONGRESOS</option>
-                                        <option value="504">S3 - PALACIO DE DEPORTES - PALACIO DE CONGRESOS</option>
-                                        <option value="508">N1 - BOBADILLA - CHANA - R. MARIN OCETE</option>
-                                        <option value="510">N3 - CERRILLO MARACENA - R. MARIN OCETE</option>
-                                        <option value="511">N4 -  FEDERICO G.LORCA - E. AUTOBUSES - CALETA</option>
-                                        <option value="512">N5 - MODESTO CENDOYA - JOAQUINA EGUARAS - CALETA</option>
-                                        <option value="513">N6 - CASERIA DEL CERRO - AVDA. PULIANAS - CALETA</option>
-                                        <option value="514">N7 - PARQUE NUEVA GRANADA - TRIUNFO</option>
-                                        <option value="515">N8 - FARGUE - TRIUNFO</option>
-                                        <option value="516">N9 - MIRADOR S. MIGUEL - TRIUNFO</option>          
-                                        <option value="517">C1 - ALBAICIN - CENTRO</option>
-                                        <option value="518">C2 - SACROMONTE - CENTRO</option>
-                                        <option value="519">C3 - ALHAMBRA - PAVANERAS</option>
-                                        <option value="520">C4 - CEMENTERIO - BCO DEL ABOGADO - PZA. ISABEL LA CATOLICA</option>
-                                        <option value="521">C5 - NEPTUNO - PZA. ISABEL LA CATOLICA</option> 
-                                        <option value="522">C6 - ROSALEDA - TRAUMATOLOGIA</option>
-                                        <option value="523">U1 - CAMPUS AYNADAMAR - CAMPUS CARTUJA</option>                                        
-                                        <option value="524">U2 - CAMPUS FUENTE NUEVA - CAMPUS CARTUJA</option>
-                                        <option value="525">U3 - P.T.SALUD - CAMPUS CARTUJA - CNO DE ALFACAR</option>                                                                       <option value="526">SN1 - CENES DE LA VEGA - E. DE AUTOBUSES</option>
-                                        <option value="527">SN2 - PALACIO DE DEPORTES - E. DE AUTOBUSES</option>                                                                            <option value="528">SN3 - REBITES - CHANA</option>
-                                        <option value="529">SN4 - P.T. SALUD - CHANA</option>
-                                        <option value="530">SN5 - AVDA. DE CADIZ - PARQUE NUEVA GRANADA</option>
-                                        <option value="531">C7 - PUERTA REAL - CEMENTERIO</option>  
-                                        <option value="901">901 - URBANO MARACENA</option>
-                                        <option value="950">950 - SERVICIO ESPECIAL (FRAY LEOPOLDO)</option>
-                                        <option value="1111">111 - GRANADA - URB. LA JOYA - PELIGROS</option>
-                                        <option value="1121">121 - GRANADA - MARACENA (CTRA DE JAEN)</option>
-                                      </select>
-                              </div>
+<body id="HFS" class="hfs">
+<div id="screenDiv">
+<div id="livemapTrainTooltip"></div>
+<div id="searchBar">
+<span title="">
+<input type="text" placeholder="Search on map" autocomplete="off" data-locationType="1" value="" name="searchOnMap" id="mapSearchField"/>
+</span>
+<script type="text/javascript">
+addEventListener("load", function() {
+new SimpleLocSuggest(eId("mapSearchField"), {
+onSelect:function(location)
+{
+Map_fullmap.centerToGeo(new CCoord({ lat:location.y, lon:location.x }));
+Map_fullmap.map.zoomTo(6)
+}
+})
+});
+</script>
+</div>
 
-                    <div>
-                        <iframe id="nextBus" style="width: 100%; height:600px; border: none" height="240" width="320"></iframe>
-                    </div>
-            </div>
-    </body>
+<div id="dimmer" style="display:none;"><img alt="" src="http://reittiopas.foli.fi/hafas-res/img/wait.gif" /></div>
+<div id="dimmericon" style="display:none;">
+<img src="http://reittiopas.foli.fi/hafas-res/img/livemap/ajax_loader.gif"/><br/><br/>
+Updating map...
+</div>
+<div id="dimmerInactivity" style="display:none;"></div>
+<div id="dimmerInactivityicon" style="display:none;">
+<div style="float:left;" class="dimmerInactivityiconLeft">
+<img onclick="Livemap_livemap.continueRequests();" src="http://reittiopas.foli.fi/hafas-res/img/livemap/continue_btn.png"/><br/><br/>
+</div>
+<div style="float:left;" class="dimmerInactivityiconRight">
+</div>
+<div style="clear:both;"></div>
+</div>
+<div style="clear:both;"></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+gImagePath = 'http://reittiopas.foli.fi/hafas-res/img/';
+gJSMapImagePath =gImagePath+"js/";
+/* ]]> */
+</script>
+<div class="ajaxmapdiv" style="overflow:hidden; z-index:0;" id="mega_map_fullmap">
+<div id="fullmap" style="position:relative; left:0;top:0;width:100%;height:490px;"></div>
+</div>
+<script type="text/javascript">
+function clickOnMapHandler_fullmap(eventData) {
+gAppManager.doEvent("clickOnMap", eventData);
+}
+var Map_fullmap = null;
+function showAjaxMap_fullmap(){
+Map_fullmap = new HafasOpenLayersMap('fullmap',
+{
+zoom:33554432,
+wheelZoom:true,
+coord:new CCoord({lon:22272838,
+lat:60448965}),
+language:'eng',
+mode:'',
+onclick:function(geo) {
+}
+});
+Map_fullmap.show();
+var initLength=Map_fullmap_InitFunctions.length;
+for(var i=0;i<initLength;i++){
+Map_fullmap_InitFunctions[i]();
+}
+}
+/* ]]> */
+</script>
+<script type="text/javascript">
+var gAppManager = new AppManager();
+</script>
+<style type="text/css">
+#HFS #screenDiv .dimmer { position:absolute; top:0px; left:0px; right:0px; bottom:0px; z-index:100000; background:#999; opacity:0.5; display:none; }
+#HFS #screenDiv .map_appDialog  { top:50%; left:50%; }
+</style>
+<div class="map_app" style="left:10px; top:20px; right:auto; display:none; z-index:8000;" id="app_livefahrplan_div" onmousedown="gAppManager.appToTop('livefahrplan');">
+<div class="dragbar" id="app_livefahrplan_dragbar">
+<span style="position:relative; z-index:100;">
+Filter
+</span>
+<img class="app_dragbar_button" src="http://reittiopas.foli.fi/hafas-res/img/app_close.png" onclick="gAppManager.hide_app_content('livefahrplan');" id="app_livefahrplan_hide" title="ausblenden" />
+<img class="app_dragbar_button" src="http://reittiopas.foli.fi/hafas-res/img/app_open.png" style="display:none;" onclick="gAppManager.show_app_content('livefahrplan');"  id="app_livefahrplan_show" title="anzeigen" />
+</div>
+<div class="app_content" id="app_livefahrplan_content" >
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/jsmap/PoiViewer.js?guiV=1.5.27&"> </script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/gui/map_poi_types.js?guiV=1.5.27&"> </script>
+<script type="text/javascript">
+Hafas.Texts = Hafas.Texts || {};
+Hafas.Texts.Livemap = new Object;
+Hafas.Texts.Livemap["followJourney"] = "Follow Bus";
+Hafas.Texts.Livemap["routeJourney"] = "Show route";
+Hafas.Texts.Livemap["onlyThisTrain"] = "";
+Hafas.Texts.Livemap["buyTickets"] = "";
+Hafas.Texts.Livemap["routePlannerQuery"] = "";
+Hafas.Texts.Livemap["showallStops"] = "";
+Hafas.Texts.Livemap["lastReportingMsg"] = "";
+Hafas.Texts.Livemap["lastReporting_1"] = "";
+Hafas.Texts.Livemap["lastReporting_2"] = "";
+Hafas.Texts.Livemap["noReportingMsg"] = "";
+Hafas.Texts.Livemap["hour"] = "";
+Hafas.Texts.Livemap["trainSearchNoResult"] = "";
+Hafas.Texts.Livemap["completeStboard"] = "";
+Hafas.Texts.Livemap["replacementTrain"] = "";
+Hafas.Texts.Livemap["showroutetextual"] = "";
+Hafas.Texts.Livemap["stopstation"] = "";
+Hafas.Texts.Livemap["scheduled"] = "";
+Hafas.Texts.Livemap["realtime"] = "";
+Hafas.Texts.Livemap["directionlabel"] = "";
+Hafas.Texts.Livemap["showroute"] = "Show route";
+Hafas.Texts.Livemap["ontime"] = "";
+Hafas.Texts.Livemap["followjourney"] = "Follow Bus";
+Hafas.Texts.Livemap["hideroute"] = "";
+Hafas.Texts.Livemap["destination"] = "";
+Hafas.Texts.Livemap["viewExternalStboard"] = "";
+Hafas.Texts.Livemap["errorUpdateTrainPosition"] = "an error has occured while retrieving vehicle positions";
+</script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/livemap/OL/hafas_livemap.js??guiV=1.5.27&"></script>
+<script type="text/javascript" src="http://reittiopas.foli.fi/hafas-res/js/livemap/OL/hafas_livemap_overlay.js??guiV=1.5.27&"></script>
+<canvas style="display:none;" width="1" height="1" id="livemap_canvas">
+</canvas>
+<div style="display:none;" id="timeoutHintDiv">
+<div class="timeHintText">
+<div style="padding:10px 0px 0px 10px;">
+<div style="font-size:12px;">
+Animation has stopped
+</div>
+<p class="floatRight button-inside querybutton">
+<button onclick="Livemap_livemap.hideInactivityPopup();" name="start" class="playButton" type="button">
+Play
+</button>
+</p>
+<div style="clear:both;"></div>
+</div>
+</div>
+</div>
+<div id="mapCatLivemapContainer">
+<div>
+<span id="timer" hidden="hidden"></span>
+<div title="" onclick="Hafas.Maps.toggleNotifications();" style="display:none;" class="notificationView" id="notificationCenter">
+<div id="notificationRoutesCounter">0</div>
+</div>
+<div title="" onclick="Hafas.Maps.toggleTrainNotifications();" class="notificationView" id="notificationsTrains">
+<div id="notificationTrainsCounter">0</div>
+</div>
+<div style="clear:both;"> </div>
+</div>
+<div id="trackwindow" style="display:none;">
+<div class="app_sub_header">You follow a:</div>
+<span style="float:left; display:block; width:35px; height:35px;">
+<img id="trackIcon" src="http://reittiopas.foli.fi/hafas-res/img/fullscreenmap/busSymbol.png" alt="" style="width:35px; height:35px;" />
+</span>
+</div>
+<div id="livemapGeneralSettings">
+<div>
+<input class="livemapCheckbox" autocomplete="off" type="checkbox" checked="checked" hidden="hidden" onclick="Hafas.Maps.enableDimmer();Livemap_livemap.setShowNames(this.checked)" id="livemap_showTrainNames"/>
+<label for="livemap_showTrainNames" hidden="hidden" >Show name of the journey</label>
+</div>
+<!--<div>
+<input class="livemapCheckbox" autocomplete="off" type="checkbox"  onclick="Hafas.Maps.enableDimmer();Livemap_livemap.setShowDestination(this.checked)" id="destinationlivemap"/>
+<label for="destinationlivemap">Show direction</label>
+</div>-->
+<!--<div>
+<input class="livemapCheckbox" autocomplete="off" type="checkbox" checked="checked" onclick="Hafas.Maps.enableDimmer();Livemap_livemap.setRealtimeInfo(this.checked)" id="realtimelivemap"/>
+<label for="realtimelivemap">Show realtime information</label>
+</div>
+<div><input class="livemapCheckbox" autocomplete="off" type="checkbox" checked="checked" onclick="Hafas.Maps.enableDimmer();Livemap_livemap.setRealtime(this.checked)" id="realtimeonlylivemap"/> <label for="realtimeonlylivemap">Journeys with realtime information only</label></div>
+<div>
+<label for="realtimeonlylivemap">Only journeys with</label> <input autocomplete="off" onkeyup="Livemap_livemap.checkMinDelay(this);" style="vertical-align:middle;" value="" type="text" maxlength="2" size="2"/> <label for="realtimeonlylivemap">min. delay</label>
+</div>-->
+</div>
+
+<div id="livemapJourneysAndStops" class="productSelector">
+<div class="prodItem">
+<input class="livemapCheckbox" hidden="hidden"  autocomplete="off" checked="checked" id="livemap_chb_0" onclick="Livemap_livemap.setProductClass(1,this.checked)" type="checkbox"/>
+</div>
+<div class="prodItem" onclick="gStationsApp.poiViewer.onUpdateState('station_8');">
+<input class="livemapCheckbox" autocomplete="off" id="StationMenuCheckbox_8"  type="checkbox" hidden="hidden"/>
+</div>
+<div style="clear:both;"> </div>
+</div>
+<div class="app_sep"> </div>
+<div id="Livemap_LineFilterShowButton" style="text-align:center;">
+<button class="button" onclick="Livemap_livemap.lineFilter.show();">Filter lines</button>
+</div>
+<div id="Livemap_LineFilterContainer">
+</div>
+<div id="Livemap_LineFilterHideButton" style="text-align:center; display:none;">
+<button id="linemal_lineFilterDisButton" class="button" onclick="Livemap_livemap.lineFilter.disableAll();">Hide all</button>
+<button id="linemal_lineFilterEnButton" class="button" onclick="Livemap_livemap.lineFilter.enableAll();" style="display:none;">Show all</button>
+<button class="button" onclick="Livemap_livemap.lineFilter.hide();">No filter</button>
+</div>
+<div id="livemapFurtherButtons" > </div>
+<div style="clear:both;"></div>
+</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+function livemapApiSwitchCallback(map){
+Livemap_livemap.switchAPI(map);
+}
+function initMainMap(){
+if(typeof Map_fullmap != 'undefined'){
+var zoomLevel = new Array();
+var zoomLevelDelay = new Array();
+zoomLevel.push(52500000);
+zoomLevelDelay.push(5250000);
+zoomLevel.push(1000000);
+zoomLevelDelay.push(5250000);
+zoomLevel.push(1000000);
+zoomLevelDelay.push();
+zoomLevel.push(100000);
+zoomLevelDelay.push(5250000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(600000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(10000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(10000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(10000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(10000);
+zoomLevel.push(100000);
+zoomLevelDelay.push(20000);
+if(typeof Livemap_livemap == "undefined"){
+Livemap_livemap = new Hafas.Livemap({
+name:"livemap",
+map:Map_fullmap,
+zoomlevels:zoomLevel,
+zoomLevelsDelay:zoomLevelDelay,
+div:"detail_livemap_div",
+params:{
+shownames: true
+,showrealtimeinfo: true
+,rtonly: true
+}
+});
+}
+}else{
+alert('Map not ready yet!');
+}
+toggleAnimationButtonlivemap = function(){
+if(eId('animateBtnlivemap').value == ""){
+if(!Livemap_livemap.aktiv)
+{
+eId('animateBtnlivemap').value = "";
+Livemap_livemap.startanimation();
+}
+}else{
+if(Livemap_livemap.aktiv)
+{
+eId('animateBtnlivemap').value = "";
+Livemap_livemap.stopanimation();
+}
+}
+}
+}
+function startClock()
+{
+clock = new Date;
+clock_result = convertTimeStamps(clock.getHours()) + ":" + convertTimeStamps(clock.getMinutes()) + ":" + convertTimeStamps(clock.getSeconds());
+document.getElementById("timer").innerHTML = clock_result;
+setTimeout("startClock()",1000);
+}
+function convertTimeStamps(Value){
+return (Value > 9) ? "" + Value : "0" + Value;
+}
+Map_fullmap_InitFunctions.push(initMainMap);
+addEventListener("load",function(){
+startClock();
+});
+/* ]]> */
+</script>
+<script type="text/template" id="livemapInfoboxTrain">
+<div class="livemapInfobox">
+<div class="head">
+<strong>
+{{if train.dateRef}}
+<a style="text-decoration:underline; cursor:pointer;" onclick='hfsGui.tq.searchLine("{{train.name}}", "{{train.trainId}}", "{{train.dateRef}}", null);'>{{train.name}}</a>
+{{else}}
+{{train.name}}
+{{/if}}
+</strong> {{train.destination}}
+</div>
+<table class="stationList">
+<tr>
+<td class="sep" colspan="3"><div> </div></td>
+</tr>
+<tr>
+<td class="name">{{train.startStation.name}}</td>
+<td class="time">{{train.startStation.time}}</td>
+<td class="realTime {{train.startStation|livemapGetTrainRealTimeClass}}">{{train.startStation|livemapGetTrainRealTime}}</td>
+</tr>
+{{if train.lastStation}}
+<tr>
+<td class="name">{{train.lastStation.name}}</td>
+<td class="time">{{train.lastStation.time}}</td>
+<td class="realTime {{train.lastStation|livemapGetTrainRealTimeClass}}">{{train.lastStation|livemapGetTrainRealTime}}</td>
+</tr>
+{{/if}}
+<tr>
+<td class="sep" colspan="3"><div> </div></td>
+</tr>
+{{if train.nextStation}}
+<tr>
+<td class="name">{{train.nextStation.name}}</td>
+<td class="time">{{train.nextStation.time}}</td>
+<td class="realTime {{train.nextStation|livemapGetTrainRealTimeClass}}">{{train.nextStation|livemapGetTrainRealTime}}</td>
+</tr>
+{{/if}}
+<tr>
+<td class="name">{{train.destStation.name}}</td>
+<td class="time">{{train.destStation.time}}</td>
+<td class="realTime {{train.destStation|livemapGetTrainRealTimeClass}}">{{train.destStation|livemapGetTrainRealTime}}</td>
+</tr>
+<tr>
+<td class="sep" colspan="3"><div> </div></td>
+</tr>
+</table>
+</div>
+</script>
+<script type="text/template" id="jsTpl_livemapLineFilterList">
+{{if lines}}
+{{else}}
+<div style="color:#999; padding:5px; text-align:center;">No lines at this time</div>
+{{/if}}
+{{lines}}
+{{if isLost}}
+{{else}}
+<div class="item">
+<input type="checkbox" id="lineCheckBox_{{#}}" onclick="Livemap_livemap.lineFilter.setTrainState('{{name}}', this.checked);"
+{{if disabled}}
+{{else}}
+checked="checked"
+{{/if}}
+/>
+<label for="lineCheckBox_{{#}}">{{name}}</label>
+</div>
+{{/if}}
+{{/lines}}
+</script>
+</div>
+</div>
+<script type="text/javascript">
+gAppManager.add_app('livefahrplan', {  }, true);
+gAppManager.remove_app('livefahrplan', true);
+window.setTimeout(function() {
+gAppManager.add_app('livefahrplan', {  });
+}, 1000+gAppManager.appCount*300);
+</script>
+<script type="text/javascript">
+//gAppManager.organizeApps();
+</script>
+</div>
+</body>
 </html>
