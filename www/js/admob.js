@@ -106,4 +106,6 @@
     //}
     function loadInterstitial() {
         AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
+        window.location.href = "Paradas.html";
+        return true;
     }
