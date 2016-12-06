@@ -109,3 +109,10 @@
         window.location.href = "Paradas.html";
         return true;
     }
+
+    function loadAnalytics(page){
+        window.ga.startTrackerWithId('UA-88579601-3', 0);
+        window.ga.setAppVersion('1.0.0.1');
+        window.ga.setAllowIDFACollection(true);
+        window.ga.trackView(page);
+    }
