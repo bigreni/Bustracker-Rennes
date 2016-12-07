@@ -3,6 +3,7 @@
             document.addEventListener('deviceready', initApp, false);
         } else {
             AndroidFullScreen.immersiveMode(null, null);
+            checkFirstUse();
             initApp();
         }
     }
@@ -115,4 +116,12 @@
         window.ga.setAppVersion('1.0.0.1');
         window.ga.setAllowIDFACollection(true);
         window.ga.trackView(page);
+    }
+
+    checkFirstUse()
+    {
+        if (!localStorage.getItem("firstuse")) {
+            alert('First use');
+            localStorage.setItem("firstuse", 1);
+        }
     }
