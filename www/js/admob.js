@@ -120,12 +120,9 @@
    function checkFirstUse()
     {
         if (localStorage.getItem("firstuse") == 0) {
-            navigator.notification.alert(
-    'Thank you for downloading!!',  // message
-    initApp,         // callback
-    'For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.',            // title
-    'OK'                  // buttonName
-        );            
+            navigator.notification.alert('Thank you for downloading!!', initApp, 'For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.', 'OK');
             localStorage.setItem("firstuse", 1);
         }
+        else
+        { initApp(); }
     }
