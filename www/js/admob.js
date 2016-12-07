@@ -2,7 +2,7 @@
         if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
             document.addEventListener('deviceready', initApp, false);
         } else {
-            AndroidFullScreen.immersiveMode(null, null);
+           AndroidFullScreen.immersiveMode(null, null);
             checkFirstUse();
             initApp();
         }
@@ -118,10 +118,12 @@
         window.ga.trackView(page);
     }
 
-    checkFirstUse()
+   function checkFirstUse()
     {
         if (!localStorage.getItem("firstuse")) {
             alert('First use');
             localStorage.setItem("firstuse", 1);
         }
+        else
+        { alert('not first use'); }
     }
