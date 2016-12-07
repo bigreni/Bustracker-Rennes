@@ -1,10 +1,9 @@
     function onLoad() {
         if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
-            document.addEventListener('deviceready', initApp, false);
+            document.addEventListener('deviceready', checkFirstUse, false);
         } else {
            AndroidFullScreen.immersiveMode(null, null);
-            checkFirstUse();
-            initApp();
+           checkFirstUse();
         }
     }
     var admobid = {};
@@ -120,10 +119,13 @@
 
    function checkFirstUse()
     {
-        if (!localStorage.getItem("firstuse")) {
-            alert('First use');
+        if (localStorage.getItem("firstuse") == 0) {
+            navigator.notification.alert(
+    'Thank you for downloading!!',  // message
+    initApp,         // callback
+    'For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.',            // title
+    'OK'                  // buttonName
+        );            
             localStorage.setItem("firstuse", 1);
         }
-        else
-        { alert('not first use'); }
     }

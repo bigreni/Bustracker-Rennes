@@ -36,6 +36,7 @@ xmlns:gap="http://phonegap.com/ns/1.0"
     <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
     <gap:plugin name="cordova-plugin-fullscreen" source="npm"/>
+    <gap:plugin name="cordova-plugin-dialogs" source="npm"/>
     <gap:plugin name="cordova-plugin-google-analytics" source="npm"/>
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
