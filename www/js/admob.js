@@ -2,7 +2,7 @@
         if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
             document.addEventListener('deviceready', checkFirstUse, false);
         } else {
-           AndroidFullScreen.immersiveMode(null, null);
+          // AndroidFullScreen.immersiveMode(null, null);
            checkFirstUse();
         }
     }
@@ -119,10 +119,14 @@
 
    function checkFirstUse()
     {
-        if (localStorage.getItem("firstuse") == 0) {
+        var p = localStorage.getItem("firstuse");
+        if (p == 0) 
+        {
             navigator.notification.alert('Thank you for downloading!!', initApp, 'For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.', 'OK');
             localStorage.setItem("firstuse", 1);
         }
         else
-        { initApp(); }
+        {            
+        initApp(); 
+        }
     }
