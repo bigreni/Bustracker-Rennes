@@ -120,7 +120,7 @@
    function checkFirstUse()
     {
         var p = window.localStorage.getItem("firstuse");
-        if (p == 0) 
+        if (p == null) 
         {
             navigator.notification.alert('For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.', initApp, 'Thank you for downloading', 'OK');
             window.localStorage.setItem("firstuse", 1);
