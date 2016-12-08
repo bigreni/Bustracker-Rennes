@@ -119,14 +119,14 @@
 
    function checkFirstUse()
     {
-        //var p = localStorage.getItem("firstuse");
-        //if (p == 0) 
-        //{
+        var p = window.localStorage.getItem("firstuse");
+        if (p == 0) 
+        {
             navigator.notification.alert('For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.', initApp, 'Thank you for downloading', 'OK');
-       //     localStorage.setItem("firstuse", 1);
-//        }
-  //      else
-    //    {            
-      //  initApp(); 
-        //}
+            window.localStorage.setItem("firstuse", 1);
+        }
+        else
+        {
+            navigator.notification.alert(p, initApp, 'Else block', 'OK');            
+        }
     }
