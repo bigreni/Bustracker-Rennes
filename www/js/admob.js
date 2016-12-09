@@ -127,21 +127,21 @@
         }
         else
         {
-            initApp();
             askRating();
+            initApp();
         }
     }
 function askRating()
 {
-    AppRate.preferences.useLanguage = 'es';
     AppRate.preferences = {
   openStoreInApp: true,
+  useLanguage:  'es',
   usesUntilPrompt: 2,
   promptAgainForEachNewVersion: false,
   storeAppURL: {
-    android: 'market://details?id=com.buenosaires.withads'
-  }
+                android: 'market://details?id=com.buenosaires.withads'
+               }
 };
  
-AppRate.promptForRating();
+AppRate.promptForRating(false);
 }
