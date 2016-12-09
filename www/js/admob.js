@@ -122,11 +122,26 @@
         var p = window.localStorage.getItem("firstuse");
         if (p == null) 
         {
-            navigator.notification.alert('For maximum screen space, we hide the phone menu. To exit app, please swipe up from the bottom or down from the top.', initApp, 'Thank you for downloading', 'OK');
+            navigator.notification.alert('For maximum screen space, the phone menu is hidden. To see the menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
             window.localStorage.setItem("firstuse", 1);
         }
         else
         {
-            navigator.notification.alert(p, initApp, 'Else block', 'OK');            
+            initApp();
+            askRating();
         }
     }
+function askRating()
+{
+    AppRate.preferences.useLanguage = 'es';
+    AppRate.preferences = {
+  openStoreInApp: true,
+  usesUntilPrompt: 2,
+  promptAgainForEachNewVersion: false,
+  storeAppURL: {
+    android: 'market://details?id=com.buenosaires.withads'
+  }
+};
+ 
+AppRate.promptForRating();
+}
