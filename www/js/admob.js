@@ -106,8 +106,6 @@
     //}
     function loadInterstitial() {
         AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
-        window.location.href = "Paradas.html";
-        return true;
     }
 
     function loadAnalytics(page){
@@ -122,7 +120,11 @@
         var p = window.localStorage.getItem("firstuse");
         if (p == null) 
         {
-            navigator.notification.alert('For maximum screen space, the phone menu is hidden. To see the menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
+            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
+//Spanish
+//            navigator.notification.alert('Para ver el menú del teléfono, por favor, arrastra la pantalla desde arriba hacia abajo o desde abajo hacia arriba.', initApp, 'Gracias por descargar la app', 'OK');
+//Finnish
+//            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
             window.localStorage.setItem("firstuse", 1);
         }
         else
@@ -131,12 +133,13 @@
             initApp();
         }
     }
+
 function askRating()
 {
-    AppRate.preferences = {
+  AppRate.preferences = {
   openStoreInApp: true,
   useLanguage:  'es',
-  usesUntilPrompt: 2,
+  usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   storeAppURL: {
                 android: 'market://details?id=com.buenosaires.withads'
